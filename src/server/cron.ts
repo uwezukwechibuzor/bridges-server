@@ -89,6 +89,13 @@ const cron = () => {
     15
   );
 
+  runAfterDelay(
+    "aggregateHyperlane",
+    5,
+    () => runAggregateHistoricalByName(dayjs().subtract(2, "day").unix(), dayjs().unix(), "hyperlane"),
+    20
+  );
+
   runAfterDelay("aggregateAll", 5, runAggregateAllAdapters, 15);
   runAfterDelay("aggregateHourly", 5, aggregateHourlyVolume, 15);
   runAfterDelay("aggregateDaily", 5, aggregateDailyVolume, 15);

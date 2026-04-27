@@ -153,10 +153,13 @@ export const runAggregateDataAllAdapters = async (timestamp: number, hourly: boo
   console.log("Finished aggregating job.");
 };
 
+const aggregationsWithDedicatedJobs = new Set(["layerzero", "hyperlane"]);
+
 export const runAggregateDataHistoricalAllAdapters = async (startTimestamp: number, endTimestamp: number) => {
   const promises = Promise.all(
     bridgeNetworks.map(async (bridgeNetwork) => {
-      const { id } = bridgeNetwork;
+      const { id, bridgeDbName } = bridgeNetwork;
+      if (aggregationsWithDedicatedJobs.has(bridgeDbName)) return;
       try {
         await runAggregateDataHistorical(startTimestamp, endTimestamp, id, true);
       } catch (e) {
