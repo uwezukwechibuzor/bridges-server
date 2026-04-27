@@ -71,8 +71,8 @@ CREATE TABLE IF NOT EXISTS bridges.hourly_aggregated (
 CREATE INDEX IF NOT EXISTS hourly_aggregated_ts ON bridges.hourly_aggregated (ts);
 
 CREATE TABLE IF NOT EXISTS bridges.large_transactions (
-    id INT GENERATED ALWAYS AS IDENTITY,
-    tx_pk INT UNIQUE NOT NULL,
+    id BIGINT GENERATED ALWAYS AS IDENTITY,
+    tx_pk BIGINT UNIQUE NOT NULL,
     usd_value NUMERIC NOT NULL,
     ts TIMESTAMPTZ NOT NULL,
     PRIMARY KEY(id),
